@@ -114,6 +114,18 @@ El flujo recomendado para este repositorio es:
 
 Para cambios solo de documentacion, el check esperado actualmente es `git diff --check` cuando aplique. Para cambios de aplicacion, usar los scripts disponibles en `package.json`.
 
+## Desarrollo local y CI
+
+El entorno esperado para desarrollo y CI es Node.js 20.x, alineado con `.nvmrc` y `engines.node` en `package.json`.
+
+Para instalaciones limpias, usar `npm ci`. Los checks basicos locales y de CI son:
+
+- `npm run lint`
+- `node scripts/pos-ui-shell-contract.test.mjs`
+- `npm run build`
+
+No ejecutar `npm audit fix --force` de forma rutinaria: puede cambiar dependencias de forma agresiva y debe revisarse como una tarea separada.
+
 ## Seguridad y datos sensibles
 
 Nunca se deben commitear `.env`, `.env.local`, secretos, claves de Supabase, claves `service-role`, passwords de base de datos, tokens o credenciales.
