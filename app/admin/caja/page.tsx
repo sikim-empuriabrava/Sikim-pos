@@ -17,7 +17,7 @@ export default function CajaPage() {
         <MetricTile tone="light" label="Cobros" value={formatCurrency(797.1)} detail="Ejemplo" />
         <MetricTile tone="light" label="Efectivo" value={formatCurrency(436.2)} detail="Esperado" />
         <MetricTile tone="light" label="Diferencia" value={formatCurrency(-6.2)} detail="Por revisar" />
-        <MetricTile tone="light" label="Turno" value="Abierto" detail="Cena" />
+        <MetricTile tone="light" label="Cash/session" value="Mock" detail="Cena abierta local" />
       </div>
 
       <div className="grid gap-4 xl:grid-cols-[1fr_420px]">

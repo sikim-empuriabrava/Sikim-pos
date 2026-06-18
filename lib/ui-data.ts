@@ -133,6 +133,14 @@ export const cashSession: CashSession = {
   expectedCash: 436.2,
 };
 
+export const legacyParityCounts = {
+  products: 128,
+  helpEntries: 112,
+  printerProfiles: 6,
+  productionRoutes: 7,
+  permissionCells: 32,
+};
+
 export const operatorLinks = [
   { href: "/turno", label: "Abrir turno" },
   { href: "/pos", label: "POS sala" },
@@ -144,15 +152,18 @@ export const operatorLinks = [
 ];
 
 export const adminLinks = [
-  { href: "/admin", label: "Admin" },
-  { href: "/admin/catalogo", label: "Catalogo" },
-  { href: "/admin/mesas", label: "Mesas" },
-  { href: "/admin/reservas", label: "Reservas" },
-  { href: "/admin/comandas", label: "Comandas" },
-  { href: "/admin/produccion", label: "Produccion" },
-  { href: "/admin/caja", label: "Caja" },
+  { href: "/admin", label: "Inici" },
+  { href: "/admin/catalogo", label: "Catàleg" },
+  { href: "/admin/mesas", label: "Zones i taules" },
+  { href: "/admin/reservas", label: "Reserves" },
+  { href: "/admin/produccion", label: "Producció" },
+  { href: "/admin/comandas", label: "Comandes" },
   { href: "/admin/informes", label: "Informes" },
-  { href: "/admin/usuarios", label: "Usuarios" },
+  { href: "/admin/sikim-app", label: "SIKIM APP" },
+  { href: "/admin/caja", label: "Caixa" },
+  { href: "/admin/fiscal", label: "Fiscal / Odoo" },
+  { href: "/admin/usuarios", label: "Usuaris i permisos" },
+  { href: "/admin/help", label: "Ajuda" },
 ];
 
 export const tableZones: TableZone[] = [
@@ -182,7 +193,7 @@ export const tableZones: TableZone[] = [
   },
   {
     id: "mediterraneo",
-    name: "Mediterraneo",
+    name: "Mediterráneo",
     shortName: "Medit.",
     description: "Area de apoyo para temporada",
   },
@@ -753,40 +764,70 @@ export const productionTickets: ProductionTicket[] = [
 
 export const adminModules: AdminModule[] = [
   {
-    title: "Catalogo POS",
+    title: "Catàleg Cheffing -> TPV",
     href: "/admin/catalogo",
     description: "Visibilidad TPV, estacion y precio de referencia desde Cheffing.",
     status: "Shell",
   },
   {
-    title: "Mesas y zonas",
+    title: "Zones i taules",
     href: "/admin/mesas",
     description: "Mapa fisico, capacidad y agrupaciones futuras.",
     status: "Shell",
   },
   {
-    title: "Reservas",
+    title: "Reserves",
     href: "/admin/reservas",
     description: "Relacion conceptual entre reservas y sesiones de mesa.",
     status: "Shell",
   },
   {
-    title: "Produccion",
+    title: "Producció",
     href: "/admin/produccion",
     description: "Estaciones, rutas logicas e intentos de impresion previstos.",
     status: "Shell",
   },
   {
-    title: "Caja",
-    href: "/admin/caja",
-    description: "Resumen de cobros, movimientos y cierre de turno.",
-    status: "Inicial",
+    title: "Comandes",
+    href: "/admin/comandas",
+    description: "Revision mock de comandas abiertas, cerradas y pendientes.",
+    status: "Shell",
   },
   {
-    title: "Usuarios",
+    title: "Informes",
+    href: "/admin/informes",
+    description: "Informes mock de ventas, Cheffing y metodos de pago.",
+    status: "Mock",
+  },
+  {
+    title: "SIKIM APP",
+    href: "/admin/sikim-app",
+    description: "Eventos mock POS -> SIKIM APP para stock/inventario futuro.",
+    status: "Mock",
+  },
+  {
+    title: "Caixa",
+    href: "/admin/caja",
+    description: "Resumen de cobros, movimientos y cierre de turno.",
+    status: "Mock",
+  },
+  {
+    title: "Fiscal / Odoo",
+    href: "/admin/fiscal",
+    description: "Puente fiscal mock, sin AEAT, VeriFactu, Odoo ni factura real.",
+    status: "Mock",
+  },
+  {
+    title: "Usuaris i permisos",
     href: "/admin/usuarios",
     description: "Capacidades POS propuestas, sin auth real.",
     status: "Plan",
+  },
+  {
+    title: "Ajuda",
+    href: "/admin/help",
+    description: "Base de conocimiento mock y propuestas sin persistencia.",
+    status: "Mock",
   },
 ];
 

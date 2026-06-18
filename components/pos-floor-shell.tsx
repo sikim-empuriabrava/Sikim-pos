@@ -93,12 +93,12 @@ function ReservationPanel({ onClose }: { onClose: () => void }) {
   const actionLabels = [
     "Acceptar / Aceptar",
     "Rebutjar / Rechazar",
-    "Veure reserva",
-    "Assignar taula",
-    "Cancel.lar assignacio",
-    "Asseure client",
-    "Obrir taula",
-    "Tancar reserva 0,00 EUR",
+    "Veure reserva / Ver reserva",
+    "Assignar taula / Asignar mesa",
+    "Cancel·lar assignació / Cancelar asignación",
+    "Asseure client / Sentar cliente",
+    "Obrir taula / Abrir mesa",
+    "Tancar reserva 0,00 € / Cerrar reserva 0,00 €",
   ];
 
   return (
@@ -340,7 +340,7 @@ export function PosFloorShell() {
               Ajuda
             </button>
             <Link href="/admin" className={topAction}>
-              Backoffice
+              Backoffice/Admin
             </Link>
             <button
               type="button"
@@ -414,7 +414,7 @@ export function PosFloorShell() {
                 mapMode === "edit" ? "border-blue-300 bg-blue-500 text-white" : ""
               }`}
             >
-              {mapMode === "edit" ? "Modificant mapa" : "Modificar"}
+              {mapMode === "edit" ? "Modificant mapa" : "Modificar mapa"}
             </button>
           </div>
         </div>

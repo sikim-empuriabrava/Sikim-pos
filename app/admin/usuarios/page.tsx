@@ -1,7 +1,7 @@
-import { permissions } from "@/lib/ui-data";
-import { AdminPageShell, Panel, StatusBadge } from "@/components/ui";
+import { legacyParityCounts, permissions } from "@/lib/ui-data";
+import { AdminPageShell, MetricTile, Panel, StatusBadge } from "@/components/ui";
 
-const roles = ["Responsable", "Sala", "Cocina/barra", "Admin POS"];
+const roles = ["Responsable", "Sala", "Cocina/barra", "Admin POS", "Auditor"];
 
 export default function UsuariosPage() {
   return (
@@ -9,6 +9,17 @@ export default function UsuariosPage() {
       title="Usuarios y permisos"
       description="Capacidades POS propuestas para una futura capa de auth y permisos."
     >
+      <div className="grid gap-4 md:grid-cols-3">
+        <MetricTile tone="light" label="Roles" value={`${roles.length}`} detail="mock/local" />
+        <MetricTile
+          tone="light"
+          label="Permisos"
+          value={`${legacyParityCounts.permissionCells}`}
+          detail="matriz conceptual"
+        />
+        <MetricTile tone="light" label="Auth" value="Pendiente" detail="sin enforcement" />
+      </div>
+
       <Panel
         tone="light"
         title="Capacidades"

@@ -17,8 +17,8 @@ const paymentModes = [
 ] as const;
 
 const methods = [
-  { id: "efectivo", label: "Efectivo" },
-  { id: "tarjeta", label: "Tarjeta" },
+  { id: "efectivo", label: "Efectiu / Efectivo" },
+  { id: "tarjeta", label: "Targeta / Tarjeta" },
   { id: "sumup", label: "SumUp mock" },
   { id: "manual", label: "Otro/manual" },
 ] as const;
@@ -253,7 +253,7 @@ export function PaymentShell() {
           onClick={setExact}
           className="mt-3 min-h-14 w-full rounded-md bg-slate-50 px-4 py-3 text-lg font-black text-slate-950"
         >
-          Exacte
+          Exacte / Exacto
         </button>
 
         <div className="mt-4 grid gap-3 md:grid-cols-3">
@@ -338,7 +338,7 @@ export function PaymentShell() {
       </aside>
       </div>
 
-      <footer className="grid min-h-[52px] grid-cols-4 gap-3 border-t border-white/10 bg-[#0f172a] p-3">
+      <footer className="grid min-h-[52px] grid-cols-2 gap-3 border-t border-white/10 bg-[#0f172a] p-3 md:grid-cols-4">
         <button
           type="button"
           onClick={() => setNotice("Obrir calaix registrat nomes com avis visual.")}

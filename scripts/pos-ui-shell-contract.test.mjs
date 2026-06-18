@@ -22,6 +22,9 @@ const requiredRoutes = [
   "app/admin/caja/page.tsx",
   "app/admin/informes/page.tsx",
   "app/admin/usuarios/page.tsx",
+  "app/admin/fiscal/page.tsx",
+  "app/admin/sikim-app/page.tsx",
+  "app/admin/help/page.tsx",
   "app/ayuda/page.tsx",
 ];
 

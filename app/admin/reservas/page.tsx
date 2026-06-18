@@ -1,27 +1,15 @@
+import { reservations, statusLabel } from "@/lib/ui-data";
 import { AdminPageShell, Panel, StatusBadge } from "@/components/ui";
 
-const reservations = [
-  {
-    time: "20:30",
-    name: "Reserva ejemplo A",
-    pax: 4,
-    status: "confirmada",
-    table: "Mesa 2",
-  },
-  {
-    time: "21:00",
-    name: "Reserva ejemplo B",
-    pax: 2,
-    status: "pendiente",
-    table: "Sin mesa",
-  },
-  {
-    time: "21:30",
-    name: "Walk-in previsto",
-    pax: 3,
-    status: "entrada directa",
-    table: "Por asignar",
-  },
+const reservationActions = [
+  "Acceptar / Aceptar",
+  "Rebutjar / Rechazar",
+  "Veure reserva / Ver reserva",
+  "Assignar taula / Asignar mesa",
+  "Cancel·lar assignació / Cancelar asignación",
+  "Asseure client / Sentar cliente",
+  "Obrir taula / Abrir mesa",
+  "Tancar reserva 0,00 € / Cerrar reserva 0,00 €",
 ];
 
 export default function ReservasPage() {
@@ -38,16 +26,32 @@ export default function ReservasPage() {
         <div className="grid gap-3">
           {reservations.map((reservation) => (
             <div
-              key={`${reservation.time}-${reservation.name}`}
-              className="grid gap-3 rounded-md border border-slate-200 bg-white p-4 md:grid-cols-[120px_1fr_120px_160px]"
+              key={reservation.id}
+              className="grid gap-3 rounded-md border border-slate-200 bg-white p-4 xl:grid-cols-[120px_1fr_150px]"
             >
               <p className="text-xl font-black">{reservation.time}</p>
               <div>
-                <p className="font-black">{reservation.name}</p>
-                <p className="mt-1 text-sm text-slate-500">{reservation.pax} pax</p>
+                <p className="font-black">{reservation.guest}</p>
+                <p className="mt-1 text-sm text-slate-500">
+                  {reservation.partySize} pax -{" "}
+                  {reservation.assignedTable ?? "Sin mesa"}
+                </p>
+                <p className="mt-1 text-xs font-bold text-slate-500">
+                  {reservation.zone ?? "Zona pendiente"} - {statusLabel(reservation.status)}
+                </p>
               </div>
               <StatusBadge value={reservation.status} />
-              <p className="font-bold text-slate-700">{reservation.table}</p>
+              <div className="xl:col-span-3 grid gap-2 md:grid-cols-2 xl:grid-cols-4">
+                {reservationActions.map((action) => (
+                  <button
+                    key={`${reservation.id}-${action}`}
+                    type="button"
+                    className="min-h-10 rounded-md border border-slate-300 bg-slate-50 px-3 py-2 text-xs font-black text-slate-800"
+                  >
+                    {action} <span className="text-blue-700">mock</span>
+                  </button>
+                ))}
+              </div>
             </div>
           ))}
         </div>

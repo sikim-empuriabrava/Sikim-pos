@@ -1,16 +1,16 @@
-import { formatCurrency, products } from "@/lib/ui-data";
+import { formatCurrency, legacyParityCounts, products } from "@/lib/ui-data";
 import { AdminPageShell, Panel, StatusBadge } from "@/components/ui";
 
 export default function CatalogoPage() {
   return (
     <AdminPageShell
-      title="Catalogo POS"
+      title="Catàleg POS"
       description="Overlay previsto para decidir que productos de Cheffing aparecen en el TPV, con estacion y precio de referencia."
     >
       <Panel
         tone="light"
         title="Productos visibles"
-        description="Datos de ejemplo. Cheffing sigue siendo la fuente de producto, carta y menu."
+        description={`${products.length} productos visibles como subconjunto representativo de ${legacyParityCounts.products} productos TPV/Cheffing. Cheffing sigue siendo la fuente de producto, carta y menu.`}
       >
         <div className="overflow-x-auto">
           <table className="w-full min-w-[760px] border-separate border-spacing-y-2 text-left text-sm">

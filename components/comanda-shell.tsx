@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import {
   formatCurrency,
+  legacyParityCounts,
   orderLines,
   orderTotal,
   productCategories,
@@ -204,7 +205,8 @@ export function ComandaShell() {
             <h1 className="text-3xl font-black text-white">Cercar</h1>
             <div className="mt-2 flex flex-wrap gap-2">
               <span className="rounded-md border border-yellow-300/50 bg-yellow-300/10 px-2 py-1 text-xs font-black text-yellow-100">
-                Cataleg mock - {products.length} productes visibles
+                Catàleg mock - {products.length} visibles de{" "}
+                {legacyParityCounts.products} TPV/Cheffing
               </span>
             </div>
           </div>
