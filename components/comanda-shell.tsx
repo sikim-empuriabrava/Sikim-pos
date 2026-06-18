@@ -156,14 +156,27 @@ export function ComandaShell() {
   const draftCount = lines.filter((line) => line.status === "draft").length;
 
   return (
-    <div className="grid gap-3 xl:grid-cols-[132px_1fr_390px]">
-      <aside className="rounded-md border border-slate-800 bg-[#101728] p-2">
+    <div className="min-h-[100dvh] overflow-hidden bg-[#111827] text-slate-100">
+      <header className="grid min-h-[70px] grid-cols-[140px_minmax(0,1fr)_auto] items-center gap-4 border-b border-white/10 bg-[#0f172a] px-4 py-3">
         <Link
           href="/pos"
-          className="mb-3 flex min-h-12 items-center rounded-md border border-slate-700 bg-slate-900 px-3 py-2 text-sm font-black text-white"
+          className="flex min-h-11 items-center justify-center rounded-md border border-white/10 bg-white/10 px-3 py-2 text-sm font-black text-white"
         >
-          Volver mapa
+          {"<-"} Mapa
         </Link>
+        <div className="flex min-w-0 items-baseline gap-3">
+          <h2 className="truncate text-2xl font-black text-white">
+            Restaurant - Taula 1
+          </h2>
+          <span className="shrink-0 text-sm font-black text-slate-400">
+            2 clients
+          </span>
+        </div>
+        <p className="text-sm font-black text-slate-300">SIKIM - Mode prova</p>
+      </header>
+
+      <div className="grid h-[calc(100dvh-70px)] gap-3 p-3 xl:grid-cols-[132px_minmax(0,1fr)_320px]">
+        <aside className="min-h-0 rounded-md border border-white/10 bg-[#101728] p-2">
         <div className="grid gap-2">
           {productCategories.map((category) => (
             <button
@@ -180,26 +193,18 @@ export function ComandaShell() {
             </button>
           ))}
         </div>
-      </aside>
+        </aside>
 
-      <main className="rounded-md border border-slate-800 bg-[#101728] p-3">
+        <main className="min-h-0 overflow-hidden rounded-md border border-white/10 bg-[#101728] p-3">
         <div className="mb-4 grid gap-3 lg:grid-cols-[1fr_280px]">
           <div>
             <p className="text-xs font-black uppercase text-slate-500">
-              Venta POS - mesa/sesion
+              Venda v0.4
             </p>
-            <h2 className="text-3xl font-black text-white">
-              Restaurant - Mesa 1
-              <span className="ml-3 text-base font-black text-slate-400">
-                2 clientes
-              </span>
-            </h2>
+            <h1 className="text-3xl font-black text-white">Cercar</h1>
             <div className="mt-2 flex flex-wrap gap-2">
               <span className="rounded-md border border-yellow-300/50 bg-yellow-300/10 px-2 py-1 text-xs font-black text-yellow-100">
-                Catalogo mock - {products.length} productos visibles
-              </span>
-              <span className="rounded-md border border-blue-300/50 bg-blue-300/10 px-2 py-1 text-xs font-black text-blue-100">
-                Sin Cheffing real conectado
+                Cataleg mock - {products.length} productes visibles
               </span>
             </div>
           </div>
@@ -214,7 +219,7 @@ export function ComandaShell() {
           </label>
         </div>
 
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(142px,1fr))] gap-3">
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(142px,1fr))] gap-3">
           {visibleProducts.map((product) => (
             <button
               key={product.id}
@@ -234,17 +239,17 @@ export function ComandaShell() {
             </button>
           ))}
         </div>
-      </main>
+        </main>
 
-      <aside className="overflow-hidden rounded-md bg-slate-50 text-slate-950">
+        <aside className="grid min-h-0 grid-rows-[auto_minmax(0,1fr)_auto] overflow-hidden rounded-md bg-slate-50 text-slate-950">
         <header className="border-b border-slate-200 p-4">
           <div className="flex items-start justify-between gap-3">
             <div>
               <p className="text-xs font-black uppercase text-slate-500">Ticket</p>
-              <h2 className="text-2xl font-black">Restaurant - Mesa 1</h2>
+              <h2 className="text-2xl font-black">Restaurant - Taula 1</h2>
             </div>
             <span className="rounded-md bg-blue-50 px-3 py-1 text-xs font-black text-blue-800">
-              2 clientes
+              2 clients
             </span>
           </div>
           <p className="mt-3 rounded-md bg-slate-950 px-3 py-2 text-xs font-black text-white">
@@ -252,7 +257,7 @@ export function ComandaShell() {
           </p>
         </header>
 
-        <div className="max-h-[58dvh] min-h-80 overflow-y-auto bg-slate-50 p-4">
+        <div className="overflow-y-auto bg-slate-50 p-4">
           <div className="grid gap-3">
             {lines.map((line) => (
               <TicketLine key={line.id} line={line} />
@@ -312,7 +317,8 @@ export function ComandaShell() {
             </div>
           </div>
         </section>
-      </aside>
+        </aside>
+      </div>
     </div>
   );
 }

@@ -6,13 +6,12 @@ import {
   formatCurrency,
   orderLines,
   orderTotal,
-  paymentSummary,
   statusLabel,
 } from "@/lib/ui-data";
 import { StatusBadge } from "@/components/ui";
 
 const paymentModes = [
-  { id: "full", label: "Compte complet / cuenta completa" },
+  { id: "full", label: "Compte complet" },
   { id: "separate", label: "Pagar per separat" },
   { id: "split", label: "Dividir compte" },
 ] as const;
@@ -87,17 +86,30 @@ export function PaymentShell() {
   }
 
   return (
-    <div className="grid gap-3 xl:grid-cols-[320px_1fr_300px]">
-      <aside className="overflow-hidden rounded-md bg-slate-50 text-slate-950">
+    <div className="min-h-[100dvh] overflow-hidden bg-[#111827] text-slate-100">
+      <header className="grid min-h-[70px] grid-cols-[150px_minmax(0,1fr)_auto] items-center gap-4 border-b border-white/10 bg-[#0f172a] px-4 py-3">
+        <Link
+          href="/pos/comanda"
+          className="flex min-h-11 items-center justify-center rounded-md border border-white/10 bg-white/10 px-3 py-2 text-sm font-black text-white"
+        >
+          {"<-"} Comanda
+        </Link>
+        <div className="min-w-0">
+          <h2 className="truncate text-2xl font-black text-white">
+            Cobrament - Restaurant - Taula 1
+          </h2>
+        </div>
+        <p className="text-sm font-black text-slate-300">SIKIM - Mode prova</p>
+      </header>
+
+      <div className="grid h-[calc(100dvh-122px)] gap-3 p-3 xl:grid-cols-[320px_minmax(0,1fr)_300px]">
+      <aside className="grid min-h-0 grid-rows-[auto_minmax(0,1fr)_auto] overflow-hidden rounded-md bg-slate-50 text-slate-950">
         <header className="border-b border-slate-200 p-4">
           <p className="text-xs font-black uppercase text-slate-500">Ticket</p>
-          <h2 className="text-2xl font-black">{paymentSummary.table}</h2>
-          <p className="mt-1 text-sm font-black text-slate-500">
-            {paymentSummary.covers} clientes - pago pendiente
-          </p>
+          <h2 className="text-2xl font-black">Restaurant - Taula 1</h2>
         </header>
 
-        <div className="max-h-[62dvh] overflow-y-auto p-4">
+        <div className="overflow-y-auto p-4">
           <div className="grid gap-4">
             {orderLines.slice(0, 4).map((line) => {
               const selected = selectedLines.includes(line.id);
@@ -153,7 +165,7 @@ export function PaymentShell() {
         </footer>
       </aside>
 
-      <main className="rounded-md border border-slate-800 bg-[#101728] p-4">
+      <main className="min-h-0 overflow-hidden rounded-md border border-white/10 bg-[#101728] p-4">
         <div className="grid gap-2 md:grid-cols-3">
           {paymentModes.map((paymentMode) => (
             <button
@@ -225,13 +237,13 @@ export function PaymentShell() {
 
         <div className="mt-3 grid grid-cols-3 gap-3">
           {keypad.map((key) => (
-            <button
-              key={key}
-              type="button"
-              onClick={() => appendKey(key)}
-              className="min-h-14 rounded-md border border-slate-700 bg-slate-800 px-3 py-3 text-2xl font-black text-white transition hover:bg-slate-700"
-            >
-              {key === "borrar" ? "del" : key}
+          <button
+            key={key}
+            type="button"
+            onClick={() => appendKey(key)}
+            className="min-h-14 rounded-md border border-slate-700 bg-slate-800 px-3 py-3 text-2xl font-black text-white transition hover:bg-slate-700"
+          >
+              {key === "borrar" ? "x" : key}
             </button>
           ))}
         </div>
@@ -241,7 +253,7 @@ export function PaymentShell() {
           onClick={setExact}
           className="mt-3 min-h-14 w-full rounded-md bg-slate-50 px-4 py-3 text-lg font-black text-slate-950"
         >
-          Exacte / exacto
+          Exacte
         </button>
 
         <div className="mt-4 grid gap-3 md:grid-cols-3">
@@ -266,13 +278,13 @@ export function PaymentShell() {
         </div>
       </main>
 
-      <aside className="overflow-hidden rounded-md bg-slate-50 text-slate-950">
+      <aside className="grid min-h-0 grid-rows-[auto_minmax(0,1fr)] overflow-hidden rounded-md bg-slate-50 text-slate-950">
         <header className="border-b border-slate-200 p-4">
           <p className="text-xs font-black uppercase text-slate-500">Metodo</p>
-          <h2 className="text-2xl font-black">Pago mock</h2>
+          <h2 className="text-2xl font-black">Pagament mock</h2>
         </header>
 
-        <div className="grid gap-3 p-4">
+        <div className="grid content-start gap-3 overflow-y-auto p-4">
           {methods.map((paymentMethod) => (
             <button
               key={paymentMethod.id}
@@ -308,39 +320,10 @@ export function PaymentShell() {
           <button
             type="button"
             disabled
-            className="min-h-16 cursor-not-allowed rounded-md border border-slate-300 bg-slate-200 px-3 py-3 text-lg font-black text-slate-500"
+            className="min-h-16 cursor-not-allowed rounded-md border border-blue-500 bg-blue-500/80 px-3 py-3 text-lg font-black text-white"
           >
-            Cobrar {formatCurrency(amountDue)} pendiente
+            Cobrar {formatCurrency(amountDue)} mock
           </button>
-
-          <div className="grid gap-2">
-            <button
-              type="button"
-              onClick={() => setNotice("Abrir cajon registrado solo como aviso visual.")}
-              className="min-h-12 rounded-md border border-slate-300 bg-white px-3 py-3 text-sm font-black text-slate-800"
-            >
-              Abrir cajon mock
-            </button>
-            <Link
-              href="/ticket"
-              className="min-h-12 rounded-md border border-slate-300 bg-white px-3 py-3 text-center text-sm font-black text-slate-800"
-            >
-              Imprimir ticket mock
-            </Link>
-            <button
-              type="button"
-              onClick={() => setNotice("Envio de email queda pendiente, sin destinatario real.")}
-              className="min-h-12 rounded-md border border-slate-300 bg-white px-3 py-3 text-sm font-black text-slate-800"
-            >
-              Enviar email mock
-            </button>
-            <Link
-              href="/pos/comanda"
-              className="min-h-12 rounded-md border border-slate-300 bg-white px-3 py-3 text-center text-sm font-black text-slate-800"
-            >
-              Tornar / volver
-            </Link>
-          </div>
 
           <div className="rounded-md border border-amber-300 bg-amber-50 p-3 text-xs font-bold leading-5 text-amber-900">
             No hay cobro real, terminal, factura fiscal, impresora ni email
@@ -353,6 +336,36 @@ export function PaymentShell() {
           </div>
         </div>
       </aside>
+      </div>
+
+      <footer className="grid min-h-[52px] grid-cols-4 gap-3 border-t border-white/10 bg-[#0f172a] p-3">
+        <button
+          type="button"
+          onClick={() => setNotice("Obrir calaix registrat nomes com avis visual.")}
+          className="min-h-12 rounded-md border border-white/10 bg-white/10 px-3 py-3 text-sm font-black text-white"
+        >
+          Obrir calaix
+        </button>
+        <Link
+          href="/ticket"
+          className="min-h-12 rounded-md border border-white/10 bg-white/10 px-3 py-3 text-center text-sm font-black text-white"
+        >
+          Imprimir ticket
+        </Link>
+        <button
+          type="button"
+          onClick={() => setNotice("Enviament email queda pendent, sense destinatari real.")}
+          className="min-h-12 rounded-md border border-white/10 bg-white/10 px-3 py-3 text-sm font-black text-white"
+        >
+          Enviar email
+        </button>
+        <Link
+          href="/pos/comanda"
+          className="min-h-12 rounded-md border border-white/10 bg-white/10 px-3 py-3 text-center text-sm font-black text-white"
+        >
+          Tornar
+        </Link>
+      </footer>
     </div>
   );
 }

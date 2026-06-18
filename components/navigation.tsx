@@ -12,6 +12,10 @@ export function AppNavigation() {
   const pathname = usePathname();
   const isAdminRoute = pathname.startsWith("/admin");
 
+  if (!isAdminRoute) {
+    return null;
+  }
+
   return (
     <header className="sticky top-0 z-20 border-b border-slate-800 bg-slate-950/95 text-slate-100 backdrop-blur">
       <div className="mx-auto flex max-w-[1500px] flex-col gap-3 px-4 py-3 lg:px-6">

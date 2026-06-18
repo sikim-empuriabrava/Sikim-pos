@@ -2,11 +2,9 @@ import { PaymentShell } from "@/components/payment-shell";
 
 export default function CobroPage() {
   return (
-    <main className="min-h-[100dvh] bg-slate-950 text-slate-100">
-      <div className="mx-auto grid w-full max-w-[1500px] gap-4 px-4 py-4 lg:px-6">
-        <h1 className="sr-only">Cobro mock</h1>
-        <PaymentShell />
-      </div>
+    <main className="min-h-[100dvh] bg-[#111827] text-slate-100">
+      <h1 className="sr-only">Cobro mock</h1>
+      <PaymentShell />
     </main>
   );
 }

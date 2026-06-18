@@ -1,22 +1,10 @@
 import { ShiftGateShell } from "@/components/shift-gate-shell";
-import { ActionLink, DarkPageShell } from "@/components/ui";
 
 export default function TurnoPage() {
   return (
-    <DarkPageShell
-      eyebrow="Turno y caja"
-      title="Apertura de caja"
-      description="Gate visual para abrir o cerrar sesion de caja antes de entrar al mapa de sala. Todo es mock/local, sin contabilidad ni persistencia."
-      actions={
-        <>
-          <ActionLink href="/pos" variant="primary">
-            Entrar POS sala
-          </ActionLink>
-          <ActionLink href="/admin/caja">Caja admin</ActionLink>
-        </>
-      }
-    >
+    <main className="min-h-[100dvh] bg-[#0b1220] text-slate-100">
+      <h1 className="sr-only">Apertura de caja</h1>
       <ShiftGateShell />
-    </DarkPageShell>
+    </main>
   );
 }
