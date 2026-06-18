@@ -34,15 +34,35 @@ const statusClasses: Record<string, string> = {
   libre: "border-emerald-300/40 bg-emerald-300/15 text-emerald-100",
   reservada: "border-sky-300/40 bg-sky-300/15 text-sky-100",
   ocupada: "border-amber-300/40 bg-amber-300/15 text-amber-100",
+  "pendiente cocina": "border-yellow-300/50 bg-yellow-300/15 text-yellow-100",
+  "cuenta emitida": "border-blue-300/50 bg-blue-300/15 text-blue-100",
   enviada: "border-violet-300/40 bg-violet-300/15 text-violet-100",
   cobro: "border-cyan-300/40 bg-cyan-300/15 text-cyan-100",
   incidencia: "border-rose-300/40 bg-rose-300/15 text-rose-100",
   borrador: "border-slate-400/40 bg-slate-400/15 text-slate-100",
+  draft: "border-slate-400/40 bg-slate-400/15 text-slate-100",
+  sent: "border-blue-300/40 bg-blue-300/15 text-blue-100",
   preparando: "border-amber-300/40 bg-amber-300/15 text-amber-100",
+  preparing: "border-amber-300/40 bg-amber-300/15 text-amber-100",
   lista: "border-emerald-300/40 bg-emerald-300/15 text-emerald-100",
+  ready: "border-emerald-300/40 bg-emerald-300/15 text-emerald-100",
   servida: "border-slate-300/40 bg-slate-300/15 text-slate-100",
+  served: "border-slate-300/40 bg-slate-300/15 text-slate-100",
+  voided: "border-rose-300/40 bg-rose-300/15 text-rose-100",
+  requested: "border-amber-300/50 bg-amber-300/15 text-amber-100",
+  confirmed: "border-sky-300/50 bg-sky-300/15 text-sky-100",
+  assigned: "border-violet-300/50 bg-violet-300/15 text-violet-100",
+  seated: "border-emerald-300/50 bg-emerald-300/15 text-emerald-100",
+  completed: "border-slate-300/50 bg-slate-300/15 text-slate-100",
+  cancelled: "border-rose-300/50 bg-rose-300/15 text-rose-100",
+  "no-show": "border-zinc-300/50 bg-zinc-300/15 text-zinc-100",
+  pending: "border-yellow-300/50 bg-yellow-300/15 text-yellow-100",
+  claimed: "border-blue-300/50 bg-blue-300/15 text-blue-100",
+  error: "border-rose-300/50 bg-rose-300/15 text-rose-100",
   inicial: "border-amber-500/40 bg-amber-100 text-amber-900",
   ejemplo: "border-amber-500/40 bg-amber-100 text-amber-900",
+  mock: "border-blue-500/40 bg-blue-100 text-blue-900",
+  pendiente: "border-amber-500/40 bg-amber-100 text-amber-900",
   shell: "border-sky-500/40 bg-sky-100 text-sky-900",
   plan: "border-slate-400 bg-slate-100 text-slate-700",
 };
@@ -185,6 +205,14 @@ export function StatusBadge({ value }: { value: string }) {
       className={`inline-flex items-center rounded-md border px-2.5 py-1 text-xs font-bold ${classes}`}
     >
       {value}
+    </span>
+  );
+}
+
+export function MockBadge({ children = "mock" }: { children?: ReactNode }) {
+  return (
+    <span className="inline-flex items-center rounded-md border border-blue-400/40 bg-blue-400/10 px-2 py-1 text-[11px] font-black uppercase text-blue-100">
+      {children}
     </span>
   );
 }

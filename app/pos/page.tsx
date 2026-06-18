@@ -1,21 +1,12 @@
 import { PosFloorShell } from "@/components/pos-floor-shell";
-import { ActionLink, DarkPageShell } from "@/components/ui";
 
 export default function PosPage() {
   return (
-    <DarkPageShell
-      title="POS sala"
-      description="Mapa operativo para abrir mesas, revisar sesiones y saltar rapido a comanda, cocina o cobro."
-      actions={
-        <>
-          <ActionLink href="/pos/comanda" variant="primary">
-            Ver comanda
-          </ActionLink>
-          <ActionLink href="/cocina">Cocina/barra</ActionLink>
-        </>
-      }
-    >
-      <PosFloorShell />
-    </DarkPageShell>
+    <main className="min-h-[100dvh] bg-slate-950 text-slate-100">
+      <div className="mx-auto grid w-full max-w-[1500px] gap-4 px-4 py-4 lg:px-6">
+        <h1 className="sr-only">POS sala</h1>
+        <PosFloorShell />
+      </div>
+    </main>
   );
 }

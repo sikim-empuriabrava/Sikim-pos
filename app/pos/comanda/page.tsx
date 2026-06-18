@@ -1,21 +1,12 @@
 import { ComandaShell } from "@/components/comanda-shell";
-import { ActionLink, DarkPageShell } from "@/components/ui";
 
 export default function ComandaPage() {
   return (
-    <DarkPageShell
-      title="Comanda"
-      description="Composicion inicial de pedido con categorias, productos, notas, modificadores y ticket de mesa."
-      actions={
-        <>
-          <ActionLink href="/pos">Volver a sala</ActionLink>
-          <ActionLink href="/pos/cobro" variant="primary">
-            Ir a cobro
-          </ActionLink>
-        </>
-      }
-    >
-      <ComandaShell />
-    </DarkPageShell>
+    <main className="min-h-[100dvh] bg-slate-950 text-slate-100">
+      <div className="mx-auto grid w-full max-w-[1500px] gap-4 px-4 py-4 lg:px-6">
+        <h1 className="sr-only">Comanda de mesa</h1>
+        <ComandaShell />
+      </div>
+    </main>
   );
 }

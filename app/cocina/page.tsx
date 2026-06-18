@@ -6,7 +6,7 @@ export default function CocinaPage() {
     <DarkPageShell
       eyebrow="Produccion"
       title="Cocina y barra"
-      description="Tablero inicial para seguir lineas enviadas, tiempos, notas, alergenos y estado previsto de impresion."
+      description="Tablero mock para lineas enviadas desde POS, filtros por cocina/barra/postres, reclamaciones, reimpresion y estado de print job pendiente."
       actions={
         <>
           <ActionLink href="/pos">POS sala</ActionLink>

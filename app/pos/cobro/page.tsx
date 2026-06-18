@@ -1,21 +1,12 @@
 import { PaymentShell } from "@/components/payment-shell";
-import { ActionLink, DarkPageShell } from "@/components/ui";
 
 export default function CobroPage() {
   return (
-    <DarkPageShell
-      title="Cobro"
-      description="Pantalla inicial para revisar ticket, metodo de pago, efectivo recibido, cambio y cobro dividido."
-      actions={
-        <>
-          <ActionLink href="/pos/comanda">Volver a comanda</ActionLink>
-          <ActionLink href="/ticket" variant="primary">
-            Ver ticket
-          </ActionLink>
-        </>
-      }
-    >
-      <PaymentShell />
-    </DarkPageShell>
+    <main className="min-h-[100dvh] bg-slate-950 text-slate-100">
+      <div className="mx-auto grid w-full max-w-[1500px] gap-4 px-4 py-4 lg:px-6">
+        <h1 className="sr-only">Cobro mock</h1>
+        <PaymentShell />
+      </div>
+    </main>
   );
 }

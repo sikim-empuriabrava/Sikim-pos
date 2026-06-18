@@ -10,6 +10,7 @@ function isActive(pathname: string, href: string) {
 
 export function AppNavigation() {
   const pathname = usePathname();
+  const isAdminRoute = pathname.startsWith("/admin");
 
   return (
     <header className="sticky top-0 z-20 border-b border-slate-800 bg-slate-950/95 text-slate-100 backdrop-blur">
@@ -62,22 +63,24 @@ export function AppNavigation() {
               </Link>
             ))}
           </div>
-          <div className="flex gap-2 overflow-x-auto pb-1">
-            {adminLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                aria-current={isActive(pathname, link.href) ? "page" : undefined}
-                className={`min-h-11 shrink-0 rounded-md border px-3 py-2 text-xs font-semibold transition ${
-                  isActive(pathname, link.href)
-                    ? "border-sky-300 bg-sky-300 text-slate-950"
-                    : "border-slate-800 bg-slate-950 text-slate-400 hover:border-slate-600 hover:text-slate-100"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
+          {isAdminRoute ? (
+            <div className="flex gap-2 overflow-x-auto pb-1">
+              {adminLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  aria-current={isActive(pathname, link.href) ? "page" : undefined}
+                  className={`min-h-11 shrink-0 rounded-md border px-3 py-2 text-xs font-semibold transition ${
+                    isActive(pathname, link.href)
+                      ? "border-sky-300 bg-sky-300 text-slate-950"
+                      : "border-slate-800 bg-slate-950 text-slate-400 hover:border-slate-600 hover:text-slate-100"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          ) : null}
         </nav>
       </div>
     </header>
