@@ -4,7 +4,7 @@
 
 El scaffold inicial de Next.js de Sikim POS ya esta desplegado en Vercel.
 
-La aplicacion de produccion actual muestra solo una pantalla placeholder inicial. Todavia no hay modulos POS de produccion ni integraciones operativas conectadas.
+La aplicacion de produccion esta protegida por una puerta inicial de contrasena compartida. Todavia no hay Supabase, autenticacion real de usuarios ni integraciones operativas conectadas.
 
 ## URL de producción
 
@@ -27,7 +27,20 @@ No se debe asumir que existe un archivo de configuracion custom de Vercel en est
 
 ## Variables de entorno
 
-Actualmente no se requieren variables de entorno para el despliegue porque Supabase todavia no esta conectado.
+La puerta inicial de acceso requiere variables de entorno de servidor en Vercel:
+
+- `POS_ACCESS_PASSWORD_HASH`: hash SHA-256 hexadecimal de la contrasena compartida.
+- `POS_SESSION_SECRET`: secreto para firmar la cookie httpOnly de sesion; minimo 32 caracteres aleatorios.
+- `POS_SESSION_MAX_AGE_SECONDS`: opcional; por defecto `259200` segundos, unos 3 dias.
+
+No se deben commitear valores reales en `.env`, `.env.local` ni en la documentacion. Si faltan las variables requeridas, la aplicacion falla cerrada y `/login` muestra un error de configuracion.
+
+Ejemplos locales para generar valores:
+
+```bash
+node -e "const crypto=require('crypto'); console.log(crypto.createHash('sha256').update('CAMBIA_ESTA_CONTRASENA').digest('hex'))"
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+```
 
 Cuando empiece la integracion con Supabase, las variables se deben configurar en los settings del proyecto en Vercel y no se deben commitear en el repositorio.
 
@@ -54,6 +67,8 @@ Antes de mergear cambios de aplicacion, ejecutar:
 ```bash
 npm ci
 npm run lint
+node scripts/pos-ui-shell-contract.test.mjs
+node scripts/pos-password-gate-contract.test.mjs
 npm run build
 ```
 
@@ -72,7 +87,8 @@ Si aparece un problema de instalacion, lint, build o runtime, la reproduccion y 
 Limitaciones actuales del despliegue:
 
 - no hay conexion con Supabase todavia;
-- no hay autenticacion todavia;
+- no hay autenticacion real de usuarios todavia;
+- la puerta de acceso actual es una contrasena compartida temporal;
 - no hay modulos POS todavia;
 - no hay pagos;
 - no hay impresion;

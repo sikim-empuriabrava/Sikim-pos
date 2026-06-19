@@ -33,6 +33,7 @@ Actualmente:
 - Supabase no esta configurado todavia en este repositorio;
 - la URL de produccion es https://sikim-pos.vercel.app;
 - existen scripts npm para desarrollo, lint, build y start.
+- la aplicacion esta protegida por una puerta inicial de contrasena compartida antes de conectar Supabase.
 
 No se deben asumir funcionalidades implementadas solo porque esten descritas como direccion futura.
 
@@ -80,6 +81,25 @@ Salvo que el proyecto decida explicitamente otra cosa, la direccion tecnica prev
 
 El scaffold inicial ya sigue esta direccion. Supabase y las integraciones siguen pendientes.
 
+## Acceso inicial
+
+Sikim POS usa una puerta global de contrasena compartida como proteccion inicial del despliegue publico en Vercel. Es una medida temporal antes de la integracion con Supabase y no sustituye el futuro modelo de usuarios, sesiones y permisos POS.
+
+Las variables de entorno de servidor requeridas en Vercel son:
+
+- `POS_ACCESS_PASSWORD_HASH`: hash SHA-256 hexadecimal de la contrasena compartida.
+- `POS_SESSION_SECRET`: secreto de firma para la cookie httpOnly de sesion; debe tener al menos 32 caracteres aleatorios.
+- `POS_SESSION_MAX_AGE_SECONDS`: duracion opcional de la sesion; por defecto son `259200` segundos, aproximadamente 3 dias.
+
+Ejemplos locales para generar valores sin commitearlos:
+
+```bash
+node -e "const crypto=require('crypto'); console.log(crypto.createHash('sha256').update('CAMBIA_ESTA_CONTRASENA').digest('hex'))"
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+```
+
+No se deben commitear secretos ni archivos `.env` o `.env.local`. Tras un acceso correcto, el dispositivo queda autorizado durante unos 3 dias por defecto mediante cookie firmada.
+
 ## Fuera del alcance actual
 
 No se deben anadir prematuramente:
@@ -122,6 +142,7 @@ Para instalaciones limpias, usar `npm ci`. Los checks basicos locales y de CI so
 
 - `npm run lint`
 - `node scripts/pos-ui-shell-contract.test.mjs`
+- `node scripts/pos-password-gate-contract.test.mjs`
 - `npm run build`
 
 No ejecutar `npm audit fix --force` de forma rutinaria: puede cambiar dependencias de forma agresiva y debe revisarse como una tarea separada.

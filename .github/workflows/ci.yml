@@ -35,5 +35,10 @@ jobs:
           test -f scripts/pos-ui-shell-contract.test.mjs
           node scripts/pos-ui-shell-contract.test.mjs
 
+      - name: POS password gate contract test
+        run: |
+          test -f scripts/pos-password-gate-contract.test.mjs
+          node scripts/pos-password-gate-contract.test.mjs
+
       - name: Build
         run: npm run build

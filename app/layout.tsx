@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { GlobalLogoutAction } from "@/components/logout-action";
 import { AppNavigation } from "@/components/navigation";
 import "./globals.css";
 
@@ -16,6 +17,7 @@ export default function RootLayout({
     <html lang="es" className="h-full antialiased">
       <body className="min-h-full bg-slate-950 text-slate-100">
         <AppNavigation />
+        <GlobalLogoutAction />
         {children}
       </body>
     </html>
