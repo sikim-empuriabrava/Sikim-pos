@@ -47,7 +47,13 @@ La base minima de cliente Supabase usa variables publicas de Vercel, sin valores
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
 
-Estas variables siguen separadas de las variables de la puerta de contrasena. No se deben incluir claves reales en la documentacion ni en archivos del repositorio. No se debe configurar una clave `service-role` para el navegador ni en ninguna variable `NEXT_PUBLIC_*`.
+La base server-only para futuras lecturas protegidas usa una variable de servidor de Vercel, sin valores commiteados:
+
+- `SUPABASE_SERVICE_ROLE_KEY`
+
+Esta variable debe configurarse solo en Vercel Environment Variables o en `.env.local` local. Nunca debe tener prefijo publico, nunca debe llegar a componentes cliente y nunca debe incluirse con valor real en la documentacion o en archivos del repositorio.
+
+Estas variables siguen separadas de las variables de la puerta de contrasena. Configurar la service role key no implementa todavia consultas de reservas, Cheffing, clientes, POS persistence ni Supabase Auth.
 
 Si faltan las variables de Supabase, la aplicacion debe seguir compilando y `/admin/supabase` debe mostrar estado no configurado. Tras anadir o cambiar variables en Vercel, hace falta redeploy.
 
@@ -69,6 +75,7 @@ npm ci
 npm run lint
 node scripts/pos-ui-shell-contract.test.mjs
 node scripts/pos-password-gate-contract.test.mjs
+node scripts/pos-supabase-server-foundation-contract.test.mjs
 npm run build
 ```
 

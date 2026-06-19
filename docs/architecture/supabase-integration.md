@@ -10,7 +10,7 @@ La intención es preparar futuras tareas de implementación con una dirección c
 
 El estado actual de `Sikim-pos` es:
 
-- la aplicación tiene una base mínima de cliente Supabase y diagnóstico protegido en `/admin/supabase`;
+- la aplicación tiene una base mínima de cliente Supabase, una base server-only para service role key y diagnóstico protegido en `/admin/supabase`;
 - la interfaz POS actual funciona con datos mock/locales;
 - la aplicación está protegida por una puerta global de contraseña;
 - no existen migraciones POS en este repositorio;
@@ -281,6 +281,10 @@ Variables públicas para cliente Supabase, sin valores reales:
 - `NEXT_PUBLIC_SUPABASE_URL`;
 - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`.
 
+Variable server-only para futuras rutas o acciones protegidas:
+
+- `SUPABASE_SERVICE_ROLE_KEY`.
+
 Variables existentes de la puerta de contraseña:
 
 - `POS_ACCESS_PASSWORD_HASH`;
@@ -293,6 +297,8 @@ Reglas:
 - no añadir archivos de entorno en esta tarea;
 - nunca exponer la clave `service-role` al navegador;
 - los secretos server-only no deben usar prefijo `NEXT_PUBLIC_`;
+- `SUPABASE_SERVICE_ROLE_KEY` solo debe configurarse como variable de servidor en Vercel o en `.env.local` local, sin commitear valores reales;
+- su existencia no implementa consultas de negocio, reservas, Cheffing, POS persistence ni Supabase Auth;
 - si faltan las variables Supabase, la aplicación muestra estado no configurado en `/admin/supabase`;
 - tras configurar variables en Vercel hace falta redeploy.
 
@@ -339,18 +345,19 @@ Secuencia recomendada:
 2. Decidir enfoque staging/producción.
 3. Añadir documentación de variables Supabase / plan de variables Vercel. Hecho.
 4. Añadir base mínima de cliente Supabase. Hecho.
-5. Añadir ruta interna de health/check o estado si aporta valor. Hecho: `/admin/supabase`.
-6. Plan de auth/sesión más allá de la puerta de contraseña.
-7. Diseñar el primer esquema POS.
-8. Revisar RLS y propiedad de migraciones.
-9. Aplicar primeras migraciones POS-only.
-10. Conectar panel de lectura/notificación de reservas.
-11. Conectar catálogo Cheffing en solo lectura.
-12. Implementar sesiones de mesa.
-13. Implementar comandas y líneas.
-14. Implementar líneas de producción de cocina/barra.
-15. Implementar pagos y cierre de turno.
-16. QA operativa.
+5. Añadir base server-only para service role key sin consultas ni escrituras. Hecho.
+6. Añadir ruta interna de health/check o estado si aporta valor. Hecho: `/admin/supabase`.
+7. Plan de auth/sesión más allá de la puerta de contraseña.
+8. Diseñar el primer esquema POS.
+9. Revisar RLS y propiedad de migraciones.
+10. Aplicar primeras migraciones POS-only.
+11. Conectar panel de lectura/notificación de reservas.
+12. Conectar catálogo Cheffing en solo lectura.
+13. Implementar sesiones de mesa.
+14. Implementar comandas y líneas.
+15. Implementar líneas de producción de cocina/barra.
+16. Implementar pagos y cierre de turno.
+17. QA operativa.
 
 Cada fase debe poder revisarse como PR pequeño y temático.
 

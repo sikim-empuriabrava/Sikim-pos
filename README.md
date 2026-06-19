@@ -30,7 +30,7 @@ Actualmente:
 - existe un scaffold inicial de aplicacion con Next.js, React, TypeScript, Tailwind CSS, ESLint y npm;
 - existe un shell inicial navegable de interfaz POS para sala, comanda, cobro, cocina/barra, ticket, turno, administracion y ayuda;
 - no existen migraciones de base de datos POS;
-- existe una base minima de cliente Supabase y una pagina protegida de diagnostico en `/admin/supabase`;
+- existe una base minima de cliente Supabase, una base server-only para futuras lecturas protegidas y una pagina protegida de diagnostico en `/admin/supabase`;
 - Supabase puede quedar sin configurar en CI/build sin romper la aplicacion;
 - la URL de produccion es https://sikim-pos.vercel.app;
 - existen scripts npm para desarrollo, lint, build y start.
@@ -84,12 +84,16 @@ El scaffold inicial ya sigue esta direccion. La base minima de cliente Supabase 
 
 ## Supabase
 
-La primera base tecnica de Supabase usa `@supabase/supabase-js` con URL publica y publishable key. No usa `@supabase/ssr`, no integra Supabase Auth, no lee tablas de negocio y no escribe datos.
+La primera base tecnica de Supabase usa `@supabase/supabase-js` con URL publica, publishable key y un helper server-only opcional para la service role key. No usa `@supabase/ssr`, no integra Supabase Auth, no lee tablas de negocio y no escribe datos.
 
 Variables publicas necesarias cuando se configure Supabase en Vercel o localmente:
 
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+
+Variable server-only opcional para futuras rutas o acciones protegidas:
+
+- `SUPABASE_SERVICE_ROLE_KEY`
 
 Estas variables son independientes de la puerta de contrasena:
 
@@ -97,7 +101,7 @@ Estas variables son independientes de la puerta de contrasena:
 - `POS_SESSION_SECRET`
 - `POS_SESSION_MAX_AGE_SECONDS`
 
-No configurar claves `service-role` en el navegador ni como variables `NEXT_PUBLIC_*`. Tras anadir o cambiar variables en Vercel, hace falta redeploy.
+La service role key debe configurarse solo en variables de entorno de servidor de Vercel o en `.env.local` local, nunca con prefijo publico ni en componentes cliente. Tener esta variable no significa que ya existan consultas de negocio: solo prepara futuras lecturas o acciones server-side protegidas por la puerta de contrasena y, mas adelante, por permisos reales. Tras anadir o cambiar variables en Vercel, hace falta redeploy.
 
 ## Acceso inicial
 

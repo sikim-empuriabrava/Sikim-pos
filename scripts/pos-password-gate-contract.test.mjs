@@ -9,6 +9,11 @@ const sourceRoots = ["app", "components", "lib"];
 const allowedSupabaseClientFiles = new Set([
   "lib/supabase/client.ts",
   "lib/supabase/server.ts",
+  "lib/supabase/service.ts",
+]);
+const allowedServiceRoleFiles = new Set([
+  "app/admin/supabase/page.tsx",
+  "lib/supabase/service.ts",
 ]);
 
 function read(relativePath) {
@@ -81,6 +86,7 @@ test("password gate keeps secrets server-side and avoids browser persistence", (
   const envExample = read(".env.example");
   assert.match(envExample, /^NEXT_PUBLIC_SUPABASE_URL=$/m);
   assert.match(envExample, /^NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=$/m);
+  assert.match(envExample, /^SUPABASE_SERVICE_ROLE_KEY=$/m);
   assert.match(envExample, /^POS_ACCESS_PASSWORD_HASH=$/m);
   assert.match(envExample, /^POS_SESSION_SECRET=$/m);
   assert.match(envExample, /^POS_SESSION_MAX_AGE_SECONDS=259200$/m);
@@ -100,7 +106,13 @@ test("password gate keeps secrets server-side and avoids browser persistence", (
       /POS_ACCESS_PASSWORD_HASH[\s\S]{0,120}(?:\|\||\?\?)\s*["'`][^"'`]+["'`]/,
       /POS_SESSION_SECRET[\s\S]{0,120}(?:\|\||\?\?)\s*["'`][^"'`]+["'`]/,
     ]
-      .filter((pattern) => pattern.test(source))
+      .filter((pattern) => {
+        if (pattern.source === "service_role" && allowedServiceRoleFiles.has(normalizedFile)) {
+          return false;
+        }
+
+        return pattern.test(source);
+      })
       .map((pattern) => `${file}: ${pattern}`);
     const supabaseImportViolations =
       /@supabase\//.test(source) && !allowedSupabaseClientFiles.has(normalizedFile)

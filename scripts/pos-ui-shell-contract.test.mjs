@@ -38,6 +38,11 @@ const forbiddenSourcePatterns = [
 const allowedSupabaseClientFiles = new Set([
   "lib/supabase/client.ts",
   "lib/supabase/server.ts",
+  "lib/supabase/service.ts",
+]);
+const allowedServiceRoleFiles = new Set([
+  "app/admin/supabase/page.tsx",
+  "lib/supabase/service.ts",
 ]);
 const forbiddenSupabaseBusinessQueryPatterns = [
   /\.from\(\s*["'`](?:reservations?|customers?|orders?|order_lines?|cheffing_[^"'`]*|group_events?|external_reservation_submissions|pos_[^"'`]*)["'`]/i,
@@ -106,6 +111,7 @@ test("environment example contains only approved placeholder variables", () => {
     [
       "NEXT_PUBLIC_SUPABASE_URL=",
       "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=",
+      "SUPABASE_SERVICE_ROLE_KEY=",
       "",
       "POS_ACCESS_PASSWORD_HASH=",
       "POS_SESSION_SECRET=",
@@ -123,7 +129,13 @@ test("frontend source avoids browser persistence and only uses approved Supabase
     const normalizedFile = normalizePath(file);
     const source = readFileSync(path.join(root, file), "utf8");
     const generalViolations = forbiddenSourcePatterns
-      .filter((pattern) => pattern.test(source))
+      .filter((pattern) => {
+        if (pattern.source === "service_role" && allowedServiceRoleFiles.has(normalizedFile)) {
+          return false;
+        }
+
+        return pattern.test(source);
+      })
       .map((pattern) => `${file}: ${pattern}`);
     const supabaseImportViolations =
       /@supabase\//.test(source) && !allowedSupabaseClientFiles.has(normalizedFile)
