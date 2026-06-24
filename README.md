@@ -56,6 +56,7 @@ El punto de entrada actual de arquitectura es:
 
 - [`docs/architecture/pos-v1.md`](docs/architecture/pos-v1.md)
 - [`docs/deployment/vercel.md`](docs/deployment/vercel.md)
+- [`docs/product/legacy-functional-overview.md`](docs/product/legacy-functional-overview.md)
 
 Estos documentos definen el alcance conceptual de V1, los limites del repositorio, las relaciones esperadas con reservas y Cheffing, el despliegue inicial en Vercel y las decisiones que siguen abiertas.
 
